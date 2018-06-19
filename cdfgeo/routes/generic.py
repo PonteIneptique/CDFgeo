@@ -30,17 +30,10 @@ def api_pays(pays_id):
         return jsonify(query.pays_to_json())
     
 
-@app.route("/blop/pays/<pays_id>")
-def _recup_json(pays_id) :
-    try:
-        query = Pays.query.get(pays_id)
-        pays = jsonify(query.pays_to_json())
-        print("bonjour lea")
-        print(pays)
-        return render_template("conteneur.html")
-    except:
-        print("fail")
-        return render_template("conteneur.html")
+@app.route("/pays/<pays_id>")
+def _recup_json(pays_id):
+    pays = Pays.query.get_or_404(pays_id)
+    return render_template("pays.html", pays=pays)
 
 '''
 #############################################################################
